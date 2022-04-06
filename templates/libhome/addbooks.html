@@ -1,0 +1,45 @@
+{% extends 'libhome/base.html' %}
+
+{% block head %}
+<style>
+    body{
+        background-color: #007bff;
+    }
+
+    .myform{
+        width: 500px;
+        position: absolute;
+        left: 30%;
+        top: 20%;
+        color: white;
+    }
+</style>
+{% endblock head %}
+
+{% block title %}AddBook{% endblock title %}
+
+{% block body %}
+<!-- ADD BOOKS FORM -->
+<div class="container">
+    <form method='POST' class="myform" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="exampleInputTitle">Book Title</label>
+            <input type="text" class="form-control" id="book_title" name="book_title">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputDesc">Description</label>
+            <input type="textarea" class="form-control" id="desc" name="desc">
+        </div>
+        <div class="form-group">
+            <label for="desc">Cover Image</label>
+            <input type="file" accept=".png,.jpeg,.jpg" class="form-control" id="image" name="image">
+        </div>
+        <div class="form-group">
+            <label for="bookPdf">Book Pdf</label>
+            <input type="file" accept=".pdf" class="form-control" id="book_pdf" name="book_pdf">
+        </div>
+        <button type="submit" class="btn btn-outline-light mybtn">Add Book</button>
+    </form>
+</div>
+{% endblock body %}

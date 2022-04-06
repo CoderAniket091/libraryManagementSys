@@ -1,0 +1,42 @@
+{% extends 'libhome/base.html' %}
+
+{% block head %}
+<style>
+    body{
+        background-color: #007bff;
+    }
+
+    .myform{
+        width: 500px;
+        position: absolute;
+        left: 30%;
+        top: 20%;
+        color: white;
+    }
+</style>
+{% endblock head %}
+
+{% block title %}UpdateBook{% endblock title %}
+
+{% block body %}
+<!-- UPDATE BOOKS FORM -->
+<div class="container">
+    <form method='POST' class="myform" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="hidden" name="id" id="id" required maxlength="20" value="{{book.id}}">
+        <div class="form-group">
+            <label for="exampleInputTitle">Book Title</label>
+            <input type="text" class="form-control" id="book_title" name="book_title" value="{{book.book_title}}">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputDesc">Description</label>
+            <input type="textarea" class="form-control" id="desc" name="desc" value="{{book.desc}}">
+        </div>
+        <div class="form-group">
+            <label for="desc">Cover Image</label>
+            <input type="file" accept=".png,.jpeg,.jpg" class="form-control" id="image" name="image" value="{{book.image}}">
+        </div>
+        <button type="submit" class="btn btn-outline-light mybtn">Update Book</button>
+    </form>
+</div>
+{% endblock body %}

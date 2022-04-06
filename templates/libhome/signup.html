@@ -1,0 +1,72 @@
+{% extends 'libhome/base.html' %}
+{% load static %}
+{% block title %}SignUp{% endblock title %}
+
+{% block head %}
+<style>
+    .myform{
+        width: 450px;
+        position: absolute;
+        left: 55%;
+        top: 8%;
+        background-color: skyblue;
+        border: 30px solid skyblue;
+        border-radius: 20px;
+        transition: all 1s ease-in-out
+    }
+
+    .myform:hover{
+        transform: scale(1.05);
+    }
+
+    .mybtn{
+        width: 100%
+    }
+
+    .lib-logo{
+        position: absolute;
+        top: 22%;
+        left: 20%;
+        transition: all 1s ease-in-out;
+    }
+
+    .lib-logo:hover{
+        transform: scale(1.1);
+    }
+
+</style>
+{% endblock head %}
+
+{% block body %}
+<div class="container">
+    <div class="lib-logo">
+        <img style="height: 250px;" src="{% static 'libhome/img/lib-logo1.png' %}" alt="Lib-Logo">
+    </div>
+</div>
+<div class="container">
+    <form method='POST' class="myform">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="fname">First Name</label>
+            <input type="text" class="form-control" id="fname" name="fname">
+        </div>
+        <div class="form-group">
+            <label for="lname">Last Name</label>
+            <input type="text" class="form-control" id="lname" name="lname">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="pass1" name="pass1">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Confirm Your Password</label>
+            <input type="password" class="form-control" id="pass2" name="pass2">
+        </div>
+        <button type="submit" class="btn btn-success mybtn">Create a new account</button>
+    </form>
+</div>
+{% endblock body %}

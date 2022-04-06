@@ -1,0 +1,105 @@
+{% extends 'libhome/base.html' %}
+{% block title %}
+Home
+{% endblock title %}
+{% block head %}
+<style>
+  body {
+    background-color: white;
+  }
+
+  .navbar {
+    background-color: darkblue;
+  }
+
+  .nav-link {
+    color: white;
+    transition: all 0.08s ease-in-out;
+  }
+
+  .nav-link:hover {
+    color: aqua;
+    transform: scale(1.05);
+  }
+
+  .lib-logo {
+    position: absolute;
+    left: 60%;
+    top: 5%;
+  }
+
+  .badge {
+    background-color: darkblue;
+    color: white;
+  }
+
+  .content {
+    position: absolute;
+    left: 0.65%;
+    justify-content: center;
+    text-align: center;
+    margin-top: 5%;
+    margin-bottom: 5%;
+  }
+
+  .booksbase {
+    position: absolute;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    margin-left: 20px;
+    top: 8%;
+  }
+</style>
+{% endblock head %}
+{% block body %}
+<nav class="navbar navbar-expand-lg fixed-top">
+  <div class="lib-logo">
+    <img style="height: 50px;" src="/static/libhome/img/lib-logo1.png" alt="Lib-Logo">
+  </div>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="">Home <span class="sr-only">(current)</span></a>
+      </li>
+      {% if user.is_superuser %}
+      <li class="nav-item">
+        <a class="nav-link" href="addbooks">Add Books</a>
+      </li>
+      {% else %}
+      <li class="nav-item">
+        <a class="nav-link" href="userbooks" tabindex="-1">My Books</a>
+      </li>
+      {% endif %}
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search Books by Name" aria-label="Search">
+      <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search Books</button>
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item mx-2">
+          <a href="signout">
+            <button type="button" class="btn btn-outline-light">LogOut</button>
+          </a>
+        </li>
+      </ul>
+    </form>
+  </div>
+</nav>
+<!-- CONTENT HERE -->
+<div class="card-deck booksbase">
+  {% for book in books %}
+  <div class="card">
+    <div class="card-block mx-4 my-4">
+      <img class="card-img-top" src="/media/{{book.image}}" alt="Card image cap" style="width: 200px; height: 250px;">
+      <h4 class="card-title">{{book.book_title}}</h4>
+      </p>
+      {% if user.is_superuser %}
+      <a href="updatebooks/{{book.id}}"><button class="btn btn-outline-dark">Update</button></a>
+      <a href="deletebooks/{{book.id}}"><button class="btn btn-outline-dark">Delete</button></a>
+      {% else %}
+      <a href="bookview"><button class="btn btn-outline-dark">View</button></a>
+      {% endif %}
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock body %}
