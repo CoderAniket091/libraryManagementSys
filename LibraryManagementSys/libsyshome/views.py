@@ -17,7 +17,6 @@ def home(request):
     if request.user.is_superuser:
         return render(request, 'libhome/home.html', context)
     elif request.user.is_authenticated:
-        
         return render(request, 'libhome/home.html', context)
     else:
         messages.warning(request,"Please LogIn first to visit LibSys")
